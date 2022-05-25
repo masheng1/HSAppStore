@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum HSNetWorkServiceStatus: Error {
+    case serviceRequestError
+}
+
 class HSNetWorkService {
     static let shared = HSNetWorkService()
     
@@ -15,7 +19,7 @@ class HSNetWorkService {
             let appData: HSAppDataSource = try await HSNetWork.shared.requestAppData(from: requestAPI, params: requestParams)
             return appData
         } catch {
-            throw error
+            throw HSNetWorkServiceStatus.serviceRequestError
         }
     }
 }
