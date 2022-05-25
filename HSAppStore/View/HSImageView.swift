@@ -36,3 +36,14 @@ struct HSImageView: View {
         }
     }
 }
+
+struct HSImageView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            HSImageView("invaild url")
+            HSImageView("https://is2-ssl.mzstatic.com/image/thumb/Purple116/v4/06/8c/e5/068ce5a0-8a33-41ee-488a-95067d2b241a/source/60x60bb.jpg")
+            HSImageView("https://is2-ssl.mzstatic.com/image/thumb/Purple116/v4/06/8c/e5/068ce5a0-8a33-41ee-488a-95067d2b241a/source/100x100bb.jpg")
+        }
+        .previewLayout(PreviewLayout.fixed(width: 75, height: 75))
+    }
+}

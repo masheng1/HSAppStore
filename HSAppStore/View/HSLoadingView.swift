@@ -39,3 +39,12 @@ struct HSLoadingView: View {
     }
 }
 
+struct HSLoadingView_Previews: PreviewProvider {
+    static var previews: some View {
+        Group {
+            HSLoadingView(hasMore:false)
+            HSLoadingView(hasMore:true)
+        }
+        .previewLayout(PreviewLayout.fixed(width: 390, height: 75))
+    }
+}

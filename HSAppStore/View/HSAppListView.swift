@@ -58,3 +58,9 @@ struct addProgressView: View {
         .padding(.all)
     }
 }
+
+struct HSAppListView_Previews: PreviewProvider {
+    static var previews: some View {
+        HSAppListView()
+    }
+}
