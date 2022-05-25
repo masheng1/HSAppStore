@@ -17,7 +17,7 @@ struct HSImageView: View {
 
     var body: some View {
         if let imageData = imageData {
-            Image(uiImage: UIImage(data: imageData) ?? UIImage())
+            Image(uiImage: UIImage(data: imageData) ?? UIImage(imageLiteralResourceName: "defaultImage.jpg"))
                 .resizable()
         } else {
             ProgressView()
@@ -28,7 +28,7 @@ struct HSImageView: View {
         }
     }
     
-    func getImageData() {
+    private func getImageData() {
         Task {
             HSImageCache.shared.imageForUrl(urlString: self.imageURL, completionHandler: { (data) -> () in
                 imageData = data

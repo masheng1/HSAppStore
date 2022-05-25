@@ -9,12 +9,12 @@ import Foundation
 
 @MainActor
 class HSAppViewModel: ObservableObject {
-    @Published var modelList: [HSAppModel] = [HSAppModel]()
+    @Published var modelList: [HSAppModel] = []
     @Published var hasMore: Bool = false
     var isRefreshData: Bool = false
     var hasError: Bool = false
     var errorMessage: String?
-    var likedList: [Int] = [Int]()
+    var likedList: [Int] = []
     private let requestAPI = "https://itunes.apple.com/search"
     private var loadMoreOffset = 0
     private let appModelTotalCount = 20
@@ -24,24 +24,24 @@ class HSAppViewModel: ObservableObject {
     
     func getAppData() async {
         let params: HSNetworkParams = ["entity": entityName,
-                                              "limit": requestNum,
-                                              "term": termName]
+                                       "limit": requestNum,
+                                       "term": termName]
         isRefreshData = true;
         await requestMake(with: params)
     }
     
     func loadMoreData() async {
         let params: HSNetworkParams = ["entity": entityName,
-                                               "limit": requestNum,
-                                               "term": termName,
-                                               "offset": loadMoreOffset]
+                                       "limit": requestNum,
+                                       "term": termName,
+                                       "offset": loadMoreOffset]
         isRefreshData = false;
         await requestMake(with: params)
     }
     
     private func requestMake(with requestParams: HSNetworkParams) async {
         do {
-            let appData: HSAppDataSource = try await HSNetWork.shared.requestAppData(from: requestAPI, params: requestParams)
+            let appData: HSAppDataSource = try await HSNetWorkService.shared.requestAppService(from: requestAPI, with: requestParams)!
             mergeDataList(result: appData.results)
             updateMoreTag()
             hasError = false
